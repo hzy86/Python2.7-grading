@@ -8,8 +8,8 @@ import os
 import sys
 import random
 
-FILEPATH = 'submissions'
-RANGE = 'D23:D31'
+FILEPATH = 'submissions/'
+RANGE = 'D35:D39'
 
 def find_in_zip(filepath, keyword, dir):
     """
@@ -70,15 +70,15 @@ while len(winner_list) > 1:
             try:
                 find_in_zip(filepath, 'ai.py', 'tournament')
                 print "extraction for A finished"
-            except:
-                print "extraction error with A"
+            except Exception as e:
+                print "ERROR with A:", e
                 pass
         elif file.startswith(nameB):
             try:
                 find_in_zip(filepath, 'ai.py', 'tournament_B')
                 print "extraction for B finished"
-            except:
-                print "extraction error with B"
+            except Exception as e:
+                print "ERROR with B:", e
                 pass
 
     # wait for a match to be completed
