@@ -1,4 +1,4 @@
-There are programs that automate the some process of grading Canvas submissions to save my time.
+There are programs that automate some process of grading Canvas submissions to save my time.
 
 Assumptions made:
   - The submission files are stored as true zip files in a folder named "submissions"
@@ -9,6 +9,7 @@ Some programs handle cases where the assumptions are not met. Details can be see
 such programs. Otherwise, problems are handled by your system.
 
 grading.py
+
   Automatically unzips submissions in the correct format. It extracts all files within a zip that ends with a postfix.
   Files that not end with the postfix are skipped. If an error occurs, the program prints the error message and prompts
   for continue or terminate.
@@ -21,6 +22,7 @@ grading.py
       not None and provide the relative path of the file you want to execute
 
 first_round.py tournament.py
+
 
   Using Google sheets APIs with gspread to generate random player pairs to compete in the AI Mancala tournament.
   Credentials are stored on local machine and are not revealed here. You have to set up your own google api credentials in order to
