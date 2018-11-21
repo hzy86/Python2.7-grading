@@ -1,17 +1,24 @@
 There are programs that automate the some process of grading Canvas submissions to save my time.
 
+Assumptions made:
+  - The submission files are stored as true zip files in a folder named "submissions"
+  - The filenames are formatted as "name_late(if late)_id_id_hw3(or HW3).zip"
+  - Unzipping a submission gives a folder "hw", which contains necessary files
+
+Some programs handle cases where the assumptions are not met. Details can be seen under the descriptions for
+such programs. Otherwise, problems are handled by your system.
+
 grading.py
-  In the folder "submissions" where all the submission are downloaded via SpeedGrader and unzipped, run this program to
-  automatically unzipping files that satisfy format requirements.
+  Automatically unzips submissions in the correct format. It extracts all files within a zip that ends with a postfix.
+  Files that not end with the postfix are skipped. If an error occurs, the program prints the error message and prompts
+  for continue or terminate.
 
-  In this class, it's requried that:
-    - submit a file name "hw3.zip"
-    - unzipping this file gives a folder "hw3" that contains all .py files
-
-  The filename format of Canvas submissions looks like "name_late(if late)_id_id_HW3.zip"
-
-  This program unzips files that satisfy the requirements and pause after unzipping finishes to wait for grading.
-  When grading is finished, press "Enter" to continue unzipping the next file.
+  Fields to customize at the top:
+    - filepath: the path of the folder that contains the submission zips
+    - postfix: the common postfix you want to enforce
+    - view: set to not None if you want to view all contents within a zip file
+    - execFlag and execFile: if you want to execute a file immediately after unzipping, set the flag to
+      not None and provide the relative path of the file you want to execute
 
 first_round.py tournament.py
   Using Google sheets APIs with gspread to generate random player pairs to compete in the AI Mancala tournament.
@@ -19,13 +26,20 @@ first_round.py tournament.py
   try out this program.
   Change the name of the worksheet to whatever you want to modify, but be sure to allow your google client to modify that worksheet.
 
-  first_round.py parses names from the files in "submissions", generates random pairs, and put them to the google sheet.
+  first_round.py parses names from the files in "submissions" (customizable), generates random pairs, and put them to the google sheet.
   It prints the left-out player on the console if the total number of players is odd.
 
   tournament.py takes the names of the winners from the google sheet, generates random pairs,
-  and extracts the winners' files from the "submissiosn" folder. playerA's file is put into the "tournament" folder,
+  and extracts the winners' files from the "submissions" (customizable) folder. playerA's file is put into the "tournament" folder,
   and playerB's is put into the "tournament_B" folder, both will be created in the working directory.
 
-  tournament.py waits for the matches to be completed and deletes the players' files after you enter "Enter" to continue.
+  tournament.py waits for the matches to be completed and deletes the players' files after you enter "Enter" to continue,
+  then removes the added files and prompts you for continue.
 
-  Extracted files are name "ai.py" and are put in "hw3" folders due to the submission requirements.
+  Assumptions
+    - 'ai.py' is the only program to be extracted
+    - The winner names manually entered in the google sheet have to be the same as the submission files' name field
+
+  Fields to customize at the top:
+    - FILEPATH: the path of the folder that contains the submission zips
+    - RANGE: the a1 notation of the cell range that contains the names of the winners of the last round

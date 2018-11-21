@@ -8,7 +8,9 @@ import os
 import sys
 import random
 
-dir = os.listdir('submissions')
+FILEPATH = 'submissions'
+
+dir = os.listdir(FILEPATH)
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 

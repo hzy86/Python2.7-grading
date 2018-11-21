@@ -8,7 +8,23 @@ import os
 import sys
 import random
 
-dir = os.listdir('submissions')
+FILEPATH = 'submissions'
+RANGE = 'D23:D31'
+
+def find_in_zip(filepath, keyword, dir):
+    """
+    finds files that ends with the keyword in the filepath and extract them to
+    the dir
+    """
+    with ZipFile(filepath, 'r') as zip:
+        for target in zip.infolist():
+            tname = target.filename
+            if not tname.startswith("__MACOSX") and tname.endswith(keyword):
+                target.filename = keyword
+                zip.extract(target, dir)
+    zip.close()
+
+dir = os.listdir(FILEPATH)
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 
@@ -22,7 +38,12 @@ wks = gc.open("Test").worksheet("Sheet2")
 
 # change the range here to get the winners of the last round
 # comment this line if it's the first round
-winner_list = wks.range('D24:D32')
+winner_list = wks.range(RANGE)
+
+# remove the null values in winners
+for w in winner_list:
+    if w.value == '':
+        winner_list.remove(w)
 
 while len(winner_list) > 1:
     # generate 2 random and non-repeating players
@@ -42,35 +63,33 @@ while len(winner_list) > 1:
 
     # unzip files in the local directory
     for file in dir:
-        filepath = "submissions/" + file
-        target = "hw3/ai.py"
+        filepath = FILEPATH + file
 
         # try to extract file from the players, if error occurs, raise but continue
         if file.startswith(nameA):
             try:
-                with ZipFile(filepath, 'r') as zip:
-                    zip.extract(target, "tournament")
-                    print "extraction for A finished"
+                find_in_zip(filepath, 'ai.py', 'tournament')
+                print "extraction for A finished"
             except:
                 print "extraction error with A"
                 pass
         elif file.startswith(nameB):
             try:
-                with ZipFile(filepath, 'r') as zip:
-                    zip.extract(target, "tournament_B")
-                    print "extraction for B finished"
+                find_in_zip(filepath, 'ai.py', 'tournament_B')
+                print "extraction for B finished"
             except:
                 print "extraction error with B"
                 pass
 
     # wait for a match to be completed
     con = raw_input("waiting to compete...: " + nameA + " vs. " + nameB)
-    os.remove("tournament/hw3/ai.py")
+    os.remove("tournament/ai.py")
     print "successfully removed A"
 
-    os.remove("tournament_B/hw3/ai.py")
+    os.remove("tournament_B/ai.py")
     print "successfully removed B"
-    continue
+
+    con = raw_input("push Enter to continue...")
 
 for left in winner_list:
-    print left
+    wks.append_row([left])
