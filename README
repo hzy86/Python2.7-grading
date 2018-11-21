@@ -1,6 +1,7 @@
 There are programs that automate the some process of grading Canvas submissions to save my time.
 
 grading.py
+
   In the folder "submissions" where all the submission are downloaded via SpeedGrader and unzipped, run this program to
   automatically unzipping files that satisfy format requirements.
 
@@ -14,6 +15,7 @@ grading.py
   When grading is finished, press "Enter" to continue unzipping the next file.
 
 first_round.py tournament.py
+
   Using Google sheets APIs with gspread to generate random player pairs to compete in the AI Mancala tournament.
   Credentials are stored on local machine and are not revealed here. You have to set up your own google api credentials in order to
   try out this program.
