@@ -8,7 +8,7 @@ import os
 import sys
 import random
 
-FILEPATH = 'submissions'
+FILEPATH = 'submissions/'
 
 dir = os.listdir(FILEPATH)
 

@@ -21,6 +21,7 @@ grading.py
       not None and provide the relative path of the file you want to execute
 
 first_round.py tournament.py
+
   Using Google sheets APIs with gspread to generate random player pairs to compete in the AI Mancala tournament.
   Credentials are stored on local machine and are not revealed here. You have to set up your own google api credentials in order to
   try out this program.
