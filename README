@@ -1,0 +1,31 @@
+There are programs that automate the some process of grading Canvas submissions to save my time.
+
+grading.py
+  In the folder "submissions" where all the submission are downloaded via SpeedGrader and unzipped, run this program to
+  automatically unzipping files that satisfy format requirements.
+
+  In this class, it's requried that:
+    - submit a file name "hw3.zip"
+    - unzipping this file gives a folder "hw3" that contains all .py files
+
+  The filename format of Canvas submissions looks like "name_late(if late)_id_id_HW3.zip"
+
+  This program unzips files that satisfy the requirements and pause after unzipping finishes to wait for grading.
+  When grading is finished, press "Enter" to continue unzipping the next file.
+
+first_round.py tournament.py
+  Using Google sheets APIs with gspread to generate random player pairs to compete in the AI Mancala tournament.
+  Credentials are stored on local machine and are not revealed here. You have to set up your own google api credentials in order to
+  try out this program.
+  Change the name of the worksheet to whatever you want to modify, but be sure to allow your google client to modify that worksheet.
+
+  first_round.py parses names from the files in "submissions", generates random pairs, and put them to the google sheet.
+  It prints the left-out player on the console if the total number of players is odd.
+
+  tournament.py takes the names of the winners from the google sheet, generates random pairs,
+  and extracts the winners' files from the "submissiosn" folder. playerA's file is put into the "tournament" folder,
+  and playerB's is put into the "tournament_B" folder, both will be created in the working directory.
+
+  tournament.py waits for the matches to be completed and deletes the players' files after you enter "Enter" to continue.
+
+  Extracted files are name "ai.py" and are put in "hw3" folders due to the submission requirements.
